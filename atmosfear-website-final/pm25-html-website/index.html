@@ -25,7 +25,7 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(30, 58, 138, 0.95);
+            background: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
             padding: 1rem 0;
@@ -33,8 +33,8 @@
         }
 
         .navbar.scrolled {
-            background: rgba(30, 58, 138, 0.98);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            background: rgba(15, 23, 42, 0.98);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
         }
 
         .nav-container {
@@ -59,7 +59,7 @@
         .logo-icon {
             width: 40px;
             height: 40px;
-            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -83,7 +83,7 @@
         }
 
         .nav-links a:hover {
-            color: #60a5fa;
+            color: #22d3ee;
             transform: translateY(-2px);
         }
 
@@ -94,7 +94,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: #60a5fa;
+            background: #22d3ee;
             transition: width 0.3s ease;
         }
 
@@ -112,7 +112,7 @@
         /* Hero Section */
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(30, 58, 138, 0.4), rgba(59, 130, 246, 0.3)), url('girl-mask-hero.png');
+            background: linear-gradient(rgba(15, 23, 42, 0.6), rgba(30, 41, 59, 0.5)), url('girl-mask-hero.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -136,22 +136,23 @@
             font-weight: bold;
             margin-bottom: 1rem;
             line-height: 1.1;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
         }
 
         .hero .highlight {
             color: #fbbf24;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
         }
 
         .hero p {
             font-size: clamp(1.2rem, 3vw, 1.8rem);
             margin-bottom: 2rem;
-            color: #e5e7eb;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            color: #f1f5f9;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
 
         .cta-button {
-            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
             color: white;
             padding: 15px 30px;
             font-size: 1.2rem;
@@ -161,13 +162,13 @@
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4);
         }
 
         .cta-button:hover {
-            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+            background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+            box-shadow: 0 8px 25px rgba(6, 182, 212, 0.5);
         }
 
         .scroll-indicator {
@@ -181,6 +182,7 @@
         .scroll-indicator i {
             font-size: 2rem;
             color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
 
         /* Section Styles */
@@ -199,28 +201,28 @@
             font-size: 3rem;
             font-weight: bold;
             margin-bottom: 1rem;
-            color: #1e40af;
+            color: #0f172a;
         }
 
         .section-subtitle {
             text-align: center;
             font-size: 1.2rem;
-            color: #6b7280;
+            color: #475569;
             max-width: 800px;
             margin: 0 auto 3rem;
         }
 
         /* Personal Story Section */
         .story-section {
-            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
         }
 
         .story-card {
             background: white;
             padding: 3rem;
             border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1);
-            border: 1px solid #e0e7ff;
+            box-shadow: 0 20px 40px rgba(6, 182, 212, 0.15);
+            border: 1px solid #bae6fd;
             max-width: 900px;
             margin: 0 auto;
         }
@@ -228,7 +230,7 @@
         .story-card .quote {
             font-size: 1.3rem;
             line-height: 1.8;
-            color: #374151;
+            color: #1e293b;
             font-style: italic;
             margin-bottom: 2rem;
             position: relative;
@@ -241,12 +243,12 @@
             left: 0;
             top: -10px;
             font-size: 4rem;
-            color: #3b82f6;
+            color: #06b6d4;
             font-family: serif;
         }
 
         .story-card .attribution {
-            color: #6b7280;
+            color: #64748b;
             font-weight: 500;
             margin-bottom: 2rem;
         }
@@ -255,11 +257,11 @@
             background: #f0f9ff;
             padding: 1.5rem;
             border-radius: 8px;
-            border-left: 4px solid #3b82f6;
+            border-left: 4px solid #06b6d4;
         }
 
         .story-card .impact h4 {
-            color: #1e40af;
+            color: #0f172a;
             margin-bottom: 0.5rem;
         }
 
@@ -280,7 +282,7 @@
             background: #f8fafc;
             padding: 2rem;
             border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.1);
+            box-shadow: 0 10px 25px rgba(6, 182, 212, 0.1);
             border: 1px solid #e2e8f0;
         }
 
@@ -290,11 +292,11 @@
             gap: 1rem;
             font-size: 1.5rem;
             margin-bottom: 1.5rem;
-            color: #1e40af;
+            color: #0f172a;
         }
 
         .pm25-card .icon {
-            color: #3b82f6;
+            color: #06b6d4;
             font-size: 2rem;
         }
 
@@ -307,18 +309,18 @@
             align-items: flex-start;
             gap: 1rem;
             margin-bottom: 1rem;
-            color: #374151;
+            color: #334155;
         }
 
         .pm25-list li::before {
             content: "•";
-            color: #3b82f6;
+            color: #06b6d4;
             font-size: 1.2rem;
             margin-top: 0.2rem;
         }
 
         .size-comparison {
-            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             color: white;
             padding: 2rem;
             border-radius: 12px;
@@ -327,6 +329,7 @@
         .size-comparison h3 {
             font-size: 1.5rem;
             margin-bottom: 1.5rem;
+            color: white;
         }
 
         .size-item {
@@ -334,13 +337,55 @@
             justify-content: space-between;
             align-items: center;
             padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            color: #e2e8f0;
         }
 
         .size-item:last-child {
-            border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+            border-bottom: 2px solid #fbbf24;
             font-weight: bold;
             color: #fbbf24;
+        }
+
+        /* Animation Section */
+        .animation-section {
+            background: #f1f5f9;
+            padding: 2rem 0;
+        }
+
+        .animation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .animation-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(6, 182, 212, 0.1);
+            border: 1px solid #e2e8f0;
+            text-align: center;
+        }
+
+        .animation-card img {
+            width: 100%;
+            max-width: 300px;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .animation-card h4 {
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+        }
+
+        .animation-card p {
+            color: #64748b;
+            font-size: 0.9rem;
         }
 
         /* Body Impact Visualization */
@@ -355,7 +400,7 @@
             background: white;
             padding: 1.5rem;
             border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.1);
+            box-shadow: 0 10px 25px rgba(6, 182, 212, 0.1);
             border: 1px solid #e2e8f0;
             text-align: center;
         }
@@ -369,19 +414,27 @@
         }
 
         .diagram-card h4 {
-            color: #1e40af;
+            color: #0f172a;
             margin-bottom: 0.5rem;
         }
 
         .diagram-card p {
-            color: #6b7280;
+            color: #64748b;
             font-size: 0.9rem;
         }
 
         /* Health Impact Section */
         .health-impact-section {
-            background: linear-gradient(135deg, #1e40af 0%, #3730a3 100%);
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             color: white;
+        }
+
+        .health-impact-section .section-title {
+            color: white;
+        }
+
+        .health-impact-section .section-subtitle {
+            color: #cbd5e1;
         }
 
         .health-grid {
@@ -391,17 +444,19 @@
         }
 
         .health-card {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             padding: 2rem;
             border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
             transition: transform 0.3s ease;
+            backdrop-filter: blur(10px);
         }
 
         .health-card:hover {
             transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #22d3ee;
         }
 
         .health-icon {
@@ -413,8 +468,17 @@
             justify-content: center;
             margin: 0 auto 1rem;
             font-size: 2rem;
-            background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+            background: linear-gradient(135deg, #06b6d4 0%, #22d3ee 100%);
             color: white;
+        }
+
+        .health-card h4 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .health-card p {
+            color: #cbd5e1;
         }
 
         /* Data Section */
@@ -434,7 +498,7 @@
             padding: 2rem;
             border-radius: 12px;
             border: 1px solid #e2e8f0;
-            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.1);
+            box-shadow: 0 10px 25px rgba(6, 182, 212, 0.1);
         }
 
         .prediction-card h3 {
@@ -443,11 +507,11 @@
             gap: 1rem;
             font-size: 1.5rem;
             margin-bottom: 0.5rem;
-            color: #1e40af;
+            color: #0f172a;
         }
 
         .prediction-card .icon {
-            color: #3b82f6;
+            color: #06b6d4;
         }
 
         .form-group {
@@ -457,7 +521,7 @@
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
-            color: #374151;
+            color: #1e293b;
             font-weight: 500;
         }
 
@@ -465,16 +529,16 @@
             width: 100%;
             padding: 0.75rem;
             background: #f9fafb;
-            border: 1px solid #d1d5db;
+            border: 2px solid #e2e8f0;
             border-radius: 6px;
-            color: #374151;
+            color: #1e293b;
             font-size: 1rem;
         }
 
         .form-control:focus {
             outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            border-color: #06b6d4;
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
         }
 
         .slider-container {
@@ -483,9 +547,9 @@
 
         .slider {
             width: 100%;
-            height: 6px;
-            border-radius: 3px;
-            background: #e5e7eb;
+            height: 8px;
+            border-radius: 4px;
+            background: #e2e8f0;
             outline: none;
             -webkit-appearance: none;
         }
@@ -493,20 +557,23 @@
         .slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
-            background: #3b82f6;
+            background: #06b6d4;
             cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .slider::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
-            background: #3b82f6;
+            background: #06b6d4;
             cursor: pointer;
-            border: none;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .slider-labels {
@@ -514,12 +581,12 @@
             justify-content: space-between;
             margin-top: 0.5rem;
             font-size: 0.875rem;
-            color: #6b7280;
+            color: #64748b;
         }
 
         .predict-button {
             width: 100%;
-            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
             color: white;
             padding: 0.75rem;
             border: none;
@@ -530,20 +597,20 @@
         }
 
         .predict-button:hover:not(:disabled) {
-            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+            background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
             transform: translateY(-2px);
         }
 
         .predict-button:disabled {
-            background: #9ca3af;
+            background: #94a3b8;
             cursor: not-allowed;
         }
 
         .result-card {
-            background: linear-gradient(135deg, #1e40af 0%, #3730a3 100%);
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             padding: 2rem;
             border-radius: 12px;
-            border: 1px solid #3b82f6;
+            border: 2px solid #22d3ee;
             min-height: 300px;
             display: flex;
             flex-direction: column;
@@ -553,13 +620,13 @@
 
         .result-placeholder {
             text-align: center;
-            color: #cbd5e1;
+            color: #94a3b8;
         }
 
         .result-placeholder i {
             font-size: 4rem;
             margin-bottom: 1rem;
-            color: #94a3b8;
+            color: #64748b;
         }
 
         .result-content {
@@ -575,14 +642,15 @@
             align-items: center;
             gap: 1rem;
             margin-bottom: 1rem;
+            color: #e2e8f0;
         }
 
         .result-item i {
-            color: #60a5fa;
+            color: #22d3ee;
         }
 
         .badge {
-            background: #3b82f6;
+            background: #06b6d4;
             color: white;
             padding: 0.25rem 0.75rem;
             border-radius: 9999px;
@@ -605,7 +673,7 @@
         }
 
         .result-label {
-            color: #e5e7eb;
+            color: #f1f5f9;
         }
 
         .result-sublabel {
@@ -623,21 +691,21 @@
             background: white;
             padding: 3rem;
             border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1);
-            border: 1px solid #e0e7ff;
+            box-shadow: 0 20px 40px rgba(6, 182, 212, 0.15);
+            border: 1px solid #bae6fd;
             max-width: 1000px;
             margin: 0 auto;
         }
 
         .conclusion-card h3 {
-            color: #1e40af;
+            color: #0f172a;
             font-size: 1.8rem;
             margin-bottom: 1.5rem;
             text-align: center;
         }
 
         .conclusion-card p {
-            color: #374151;
+            color: #1e293b;
             line-height: 1.8;
             font-size: 1.1rem;
         }
@@ -653,16 +721,16 @@
             background: #f0f9ff;
             padding: 1.5rem;
             border-radius: 8px;
-            border-left: 4px solid #3b82f6;
+            border-left: 4px solid #06b6d4;
         }
 
         .finding-item h4 {
-            color: #1e40af;
+            color: #0f172a;
             margin-bottom: 0.5rem;
         }
 
         .finding-item p {
-            color: #6b7280;
+            color: #475569;
             font-size: 0.95rem;
         }
 
@@ -670,6 +738,14 @@
         .about-section {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
             color: white;
+        }
+
+        .about-section .section-title {
+            color: white;
+        }
+
+        .about-section .section-subtitle {
+            color: #cbd5e1;
         }
 
         .about-grid {
@@ -681,33 +757,34 @@
         }
 
         .research-card {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             padding: 2rem;
             border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
         }
 
         .research-card h3 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
-            color: #60a5fa;
+            color: #22d3ee;
         }
 
         .research-card p {
-            color: #e5e7eb;
+            color: #e2e8f0;
             line-height: 1.8;
         }
 
         .findings-card {
-            background: linear-gradient(135deg, #1e40af 0%, #3730a3 100%);
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
             padding: 2rem;
             border-radius: 12px;
-            border: 1px solid #3b82f6;
+            border: 1px solid #22d3ee;
         }
 
         .findings-card h3 {
             margin-bottom: 1rem;
-            color: #60a5fa;
+            color: white;
         }
 
         .findings-list {
@@ -719,12 +796,12 @@
             align-items: flex-start;
             gap: 1rem;
             margin-bottom: 1rem;
-            color: #e5e7eb;
+            color: #f1f5f9;
         }
 
         .findings-list li::before {
             content: "•";
-            color: #60a5fa;
+            color: #fbbf24;
             font-size: 1.2rem;
             margin-top: 0.2rem;
         }
@@ -740,7 +817,7 @@
             background: transparent;
             color: white;
             padding: 0.75rem 1rem;
-            border: 1px solid #60a5fa;
+            border: 2px solid #22d3ee;
             border-radius: 6px;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -749,22 +826,24 @@
         }
 
         .outline-button:hover {
-            background: rgba(96, 165, 250, 0.1);
-            border-color: #60a5fa;
+            background: rgba(34, 211, 238, 0.1);
+            border-color: #22d3ee;
+            color: #22d3ee;
         }
 
         .contributors-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minItems(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
         }
 
         .contributor-card {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             padding: 2rem;
             border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
+            backdrop-filter: blur(10px);
         }
 
         .contributor-icon {
@@ -780,25 +859,45 @@
         }
 
         .contributor-icon.team {
-            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
         }
 
         .contributor-icon.data {
-            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+            background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
         }
 
         .contributor-icon.method {
-            background: linear-gradient(135deg, #93c5fd 0%, #60a5fa 100%);
+            background: linear-gradient(135deg, #67e8f9 0%, #22d3ee 100%);
         }
 
         .contributor-card h4 {
             font-size: 1.125rem;
             margin-bottom: 1rem;
-            color: #60a5fa;
+            color: #22d3ee;
         }
 
         .contributor-card p {
             color: #cbd5e1;
+        }
+
+        /* Floating Animation */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Pulse Animation */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
 
         /* Animations */
@@ -843,7 +942,8 @@
             }
 
             .health-grid,
-            .body-impact-visual {
+            .body-impact-visual,
+            .animation-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -889,6 +989,7 @@
         .interactive-element:hover {
             transform: scale(1.05);
         }
+        
     </style>
 </head>
 <body>
@@ -896,7 +997,7 @@
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="#" class="logo">
-                <div class="logo-icon">
+                <div class="logo-icon floating">
                     <i class="fas fa-wind"></i>
                 </div>
                 Atmosfear
@@ -921,31 +1022,50 @@
             <p>A Global Crisis Hidden in Plain Sight</p>
             <a href="#story-section" class="cta-button interactive-element">Discover Our Story</a>
         </div>
-        <div class="scroll-indicator">
-            <i class="fas fa-chevron-down"></i>
+        <div class="scroll-indicator pulse">
+
         </div>
     </section>
 
-    <!-- Personal Story Section -->
-    <section id="story-section" class="section story-section">
-        <div class="container">
-            <h2 class="section-title fade-in">Why This Matters to Us</h2>
-            <p class="section-subtitle fade-in">
+<!-- Personal Story Section -->
+<section id="story-section" class="section story-section enhanced-section">
+    <div class="container">
+
+        <div class="story-card fade-in interactive-element">
+            <h2 class="section-title fade-in">
+                <span class="title-bg">Why This Matters to Us</span>
+            </h2>
+
+            <p class="section-subtitle fade-in" style="text-align: center; margin-bottom: 2rem;">
                 Behind every research project is a personal story that drives our passion for change
             </p>
 
-            <div class="story-card fade-in interactive-element">
-                <div class="quote">
-                    Her mother, who has asthma, experiences severe discomfort when staying in cities with poor air quality. Even short visits can mean weeks of relying on medications, constant coughing, and the simple wish to breathe without pain. For her and millions with similar and different health conditions, clean air isn't just a preference—it's a necessity.
-                </div>
-                <div class="attribution">— Personal story from one of our team members</div>
-                <div class="impact">
-                    <h4>The Global Impact</h4>
-                    <p>This personal story reflects a broader public health challenge. Air pollution is one of the leading environmental threats to human health, contributing to an estimated <strong>7 million premature deaths annually</strong> due to its links with cardiovascular and respiratory diseases, stroke, and lung cancer (WHO, 2023; GBD, 2024).</p>
-                </div>
+            <div class="quote">
+                Her mother, who has asthma, experiences severe discomfort when staying in cities with poor air quality.
+                Even short visits can mean weeks of relying on medications, constant coughing, and the simple wish to
+                breathe without pain. For her and millions with similar and different health conditions, clean air isn't
+                just a preference—it's a necessity.
+
+                <br><br>
+
+
+            <div class="impact">
+                <h4>The Global Impact</h4>
+                <p>This personal story reflects a broader public health challenge. Air pollution is one of the leading
+                    environmental threats to human health, contributing to an estimated
+                    <strong>7 million premature deaths annually</strong> due to its links with cardiovascular and
+                    respiratory diseases, stroke, and lung cancer
+                    (<a href="https://www.who.int/news-room/fact-sheets/detail/ambient-(outdoor)-air-quality-and-health"
+                        target="_blank">WHO, 2023</a>;
+                    <a href="https://vizhub.healthdata.org/gbd-results/" target="_blank">GBD, 2024</a>).
+                </p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
+
+
 
     <!-- Why PM2.5 Section -->
     <section id="why-pm25-section" class="section why-pm25-section">
@@ -1002,6 +1122,28 @@
                 </div>
             </div>
 
+            <!-- Animation Section -->
+            <div class="animation-section">
+                <h3 style="text-align: center; font-size: 1.8rem; margin-bottom: 1rem; color: #0f172a;">PM₂.₅ in Action</h3>
+                <div class="animation-grid">
+                    <div class="animation-card fade-in interactive-element">
+                        <img src="pm25-map-animation.gif" alt="PM2.5 concentration map animation">
+                        <h4>Global PM₂.₅ Distribution</h4>
+                        <p>Real-time visualization of PM₂.₅ concentrations across different regions</p>
+                    </div>
+                    <div class="animation-card fade-in interactive-element">
+                        <img src="pollution-animation.gif" alt="Pollution particles animation">
+                        <h4>Particle Movement</h4>
+                        <p>How PM₂.₅ particles move and spread in the atmosphere</p>
+                    </div>
+                    <div class="animation-card fade-in interactive-element">
+                        <img src="pollution-education.gif" alt="Educational pollution animation">
+                        <h4>Health Impact Visualization</h4>
+                        <p>Understanding how pollution affects our environment and health</p>
+                    </div>
+                </div>
+            </div>
+
             <!-- Body Impact Visualization -->
             <div class="body-impact-visual">
                 <div class="diagram-card fade-in interactive-element">
@@ -1033,7 +1175,7 @@
 
             <div class="health-grid">
                 <div class="health-card fade-in interactive-element">
-                    <div class="health-icon">
+                    <div class="health-icon floating">
                         <i class="fas fa-heart"></i>
                     </div>
                     <h4>Cardiovascular Disease</h4>
@@ -1041,7 +1183,7 @@
                 </div>
 
                 <div class="health-card fade-in interactive-element">
-                    <div class="health-icon">
+                    <div class="health-icon floating">
                         <i class="fas fa-lungs"></i>
                     </div>
                     <h4>Respiratory Disorders</h4>
@@ -1049,7 +1191,7 @@
                 </div>
 
                 <div class="health-card fade-in interactive-element">
-                    <div class="health-icon">
+                    <div class="health-icon floating">
                         <i class="fas fa-brain"></i>
                     </div>
                     <h4>Neurological Effects</h4>
@@ -1057,7 +1199,7 @@
                 </div>
 
                 <div class="health-card fade-in interactive-element">
-                    <div class="health-icon">
+                    <div class="health-icon floating">
                         <i class="fas fa-baby"></i>
                     </div>
                     <h4>Pregnancy Complications</h4>
@@ -1082,7 +1224,7 @@
                         <i class="fas fa-chart-bar icon"></i>
                         Prediction Parameters
                     </h3>
-                    <p style="color: #6b7280; margin-bottom: 1.5rem;">Select a country and year to see predicted DALY values</p>
+                    <p style="color: #64748b; margin-bottom: 1.5rem;">Select a country and year to see predicted DALY values</p>
 
                     <div class="form-group">
                         <label for="country-select">Country</label>
@@ -1119,12 +1261,12 @@
 
                 <div class="result-card fade-in">
                     <div class="result-placeholder" id="result-placeholder">
-                        <i class="fas fa-chart-bar"></i>
+                        <i class="fas fa-chart-bar pulse"></i>
                         <p>Select a country and year to see the prediction</p>
                     </div>
 
                     <div class="result-content" id="result-content">
-                        <h3 style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                        <h3 style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; color: white;">
                             <i class="fas fa-heart" style="color: #fbbf24;"></i>
                             Prediction Result
                         </h3>
@@ -1138,7 +1280,7 @@
                         <div class="result-item">
                             <i class="fas fa-calendar-alt"></i>
                             <span>Year:</span>
-                            <span class="badge" id="result-year" style="background: #1e40af;">-</span>
+                            <span class="badge" id="result-year" style="background: #0891b2;">-</span>
                         </div>
 
                         <div class="result-value">
@@ -1188,6 +1330,32 @@
                 Understanding the global impact of air pollution on human health through comprehensive data analysis
             </p>
 
+            <!-- Project Overview -->
+            <div style="margin-bottom: 4rem;">
+                <div class="research-card fade-in interactive-element" style="max-width: 1000px; margin: 0 auto;">
+                    <h3 style="text-align: center; font-size: 2rem; margin-bottom: 1.5rem;">About Atmosfear</h3>
+                    <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 1.5rem;">
+                        <strong>Atmosfear</strong> is a data science project investigating the global health impacts of PM₂.₅, 
+                        an ultrafine pollutant small enough to penetrate deep into the lungs and bloodstream, yet pervasive 
+                        enough to affect billions worldwide.
+                    </p>
+                    <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+                        We explore how long-term exposure to PM₂.₅ has shaped the burden of cardiovascular and respiratory 
+                        diseases across countries with varying levels of socio-demographic development.
+                    </p>
+                    <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+                        Our goal is to <strong>humanize the data</strong>, to reveal the unequal health risks of polluted air 
+                        and help inform more targeted, life-saving environmental and public health interventions.
+                    </p>
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <div style="display: inline-flex; align-items: center; gap: 1rem; background: rgba(34, 211, 238, 0.1); padding: 1rem 2rem; border-radius: 8px; border: 1px solid #22d3ee;">
+                            <i class="fas fa-university" style="color: #22d3ee; font-size: 1.5rem;"></i>
+                            <span style="color: #0f172a; font-weight: 600;">Part of MIT Emerging Talent Program</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="about-grid">
                 <div class="research-card fade-in interactive-element">
                     <h3>Research Question</h3>
@@ -1208,24 +1376,23 @@
 
                     <div class="button-group">
                         <a href="#" class="outline-button">View GitHub Repository</a>
-                        <a href="#" class="outline-button">Read Full Paper</a>
                     </div>
                 </div>
             </div>
 
             <div style="margin-top: 4rem;">
-                <h3 style="text-align: center; font-size: 2rem; margin-bottom: 2rem; color: #60a5fa;" class="fade-in">Research Contributors</h3>
+                <h3 style="text-align: center; font-size: 2rem; margin-bottom: 2rem; color: #22d3ee;" class="fade-in">Research Contributors</h3>
                 <div class="contributors-grid">
                     <div class="contributor-card fade-in interactive-element">
-                        <div class="contributor-icon team">
+                        <div class="contributor-icon team floating">
                             <i class="fas fa-users"></i>
                         </div>
                         <h4>Atmosfear Team</h4>
-                        <p>Interdisciplinary team of environmental health researchers and data scientists</p>
+                        <p>Aspiring data scientists</p>
                     </div>
 
                     <div class="contributor-card fade-in interactive-element">
-                        <div class="contributor-icon data">
+                        <div class="contributor-icon data floating">
                             <i class="fas fa-globe"></i>
                         </div>
                         <h4>Data Sources</h4>
@@ -1233,7 +1400,7 @@
                     </div>
 
                     <div class="contributor-card fade-in interactive-element">
-                        <div class="contributor-icon method">
+                        <div class="contributor-icon method floating">
                             <i class="fas fa-chart-bar"></i>
                         </div>
                         <h4>Methodology</h4>
