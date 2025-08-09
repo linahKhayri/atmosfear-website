@@ -19,23 +19,6 @@
             overflow-x: hidden;
         }
 
-        /* Glossary Link Styles */
-        .glossary-link {
-            color: #06b6d4;
-            text-decoration: none;
-            border-bottom: 1px dotted #06b6d4;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .glossary-link:hover {
-            color: #0891b2;
-            border-bottom-color: #0891b2;
-            background: rgba(6, 182, 212, 0.1);
-            padding: 0 2px;
-            border-radius: 2px;
-        }
-
         /* Navigation Bar */
         .navbar {
             position: fixed;
@@ -88,7 +71,7 @@
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 1.5rem; /* Reduced gap */
+            gap: 2rem;
         }
 
         .nav-links a {
@@ -293,7 +276,6 @@
             line-height: 1.8;
             color: #1e293b;
             margin-bottom: 2rem;
-            text-shadow: none; /* Ensure text is clear on light background */
         }
 
         .stats-grid {
@@ -454,24 +436,6 @@
         .personal-story .attribution {
             color: #94a3b8;
             font-size: 0.9rem;
-        }
-
-        .ambient-note {
-            background: rgba(34, 211, 238, 0.1);
-            padding: 1.5rem;
-            border-radius: 8px;
-            border-left: 4px solid #22d3ee;
-            margin-bottom: 2rem;
-        }
-
-        .ambient-note p {
-            color: #e2e8f0;
-            font-size: 1.1rem;
-            margin: 0;
-        }
-
-        .ambient-note strong {
-            color: #22d3ee;
         }
 
         /* Methods Section */
@@ -731,15 +695,6 @@
             color: #64748b;
         }
 
-        .result-placeholder h4 {
-            color: white;
-            margin-bottom: 1rem;
-        }
-
-        .result-placeholder p {
-            color: #cbd5e1;
-        }
-
         .result-content {
             display: none;
         }
@@ -762,68 +717,6 @@
             color: #fbbf24;
             margin-bottom: 0.5rem;
         }
-
-        /* What Can Be Done Section */
-        .action-section {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            color: white;
-        }
-
-        .action-section .section-title {
-            color: white;
-        }
-
-        .action-section .section-subtitle {
-            color: #cbd5e1;
-        }
-
-        .action-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        .action-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2.5rem;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            transition: transform 0.3s ease;
-        }
-
-        .action-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .action-card .action-icon {
-            width: 4rem;
-            height: 4rem;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            font-size: 2rem;
-            color: white;
-            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
-        }
-
-        .action-card h3 {
-            color: #22d3ee;
-            text-align: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-        }
-
-        .action-card p {
-            color: #e2e8f0;
-            line-height: 1.7;
-            margin-bottom: 1rem;
-        }
-
-        /* Removed action-visual styles */
 
         /* Sources & Glossary Section */
         .sources-section {
@@ -874,7 +767,6 @@
             padding: 0.75rem;
             text-align: left;
             border-bottom: 1px solid #e2e8f0;
-            vertical-align: top;
         }
 
         .glossary-table th {
@@ -885,11 +777,6 @@
 
         .glossary-table td {
             color: #475569;
-        }
-
-        .glossary-table td:first-child {
-            font-weight: 600;
-            color: #0f172a;
         }
 
         /* About Section */
@@ -1055,8 +942,7 @@
             .pm25-grid,
             .tool-grid,
             .sources-grid,
-            .methods-grid,
-            .action-grid {
+            .methods-grid {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
@@ -1100,12 +986,11 @@
                 Atmosfear
             </a>
             <ul class="nav-links">
-                <li><a href="#why-matters">Overview</a></li>
+                <li><a href="#why-matters">Why This Matters</a></li>
+                <li><a href="#pm25-section">What is PM₂.₅</a></li>
                 <li><a href="#research-section">Research</a></li>
                 <li><a href="#findings-section">Key Findings</a></li>
-                <li><a href="#data-tool-section">Predictor</a></li>
-                <li><a href="#action-section">What Can Be Done</a></li>
-                <li><a href="#glossary">Glossary</a></li>
+                <li><a href="#data-tool-section">Predictor Tool</a></li>
                 <li><a href="#about-section">About</a></li>
             </ul>
             <div class="mobile-menu">
@@ -1141,7 +1026,7 @@
             <div class="why-matters-card fade-in interactive-element">
                 <p class="highlight-text">
                     Air pollution is often framed as an environmental issue, but it's also a public health emergency.
-                    Among all pollutants, PM₂.₅ (particulate matter smaller than 2.5 micrometers) is particularly dangerous—
+                    Among all pollutants, PM₂.₅ (particulate matter smaller than 2.5 micrometers) is particularly dangerous,
                     it's small enough to bypass your body's defenses and settle deep in your lungs and bloodstream.
                 </p>
                 <p style="color: #475569; font-size: 1.1rem; line-height: 1.7;">
@@ -1228,13 +1113,6 @@
                 Understanding the global impact of air pollution on human health through comprehensive data analysis
             </p>
 
-            <div class="ambient-note fade-in">
-                <p>
-                    <strong>Important Note:</strong> Our research focuses specifically on <strong>ambient (outdoor) PM₂.₅ air pollution</strong>, 
-                    examining its long-term health impacts across different countries and development levels.
-                </p>
-            </div>
-
             <div class="research-story fade-in interactive-element">
                 <h3 style="color: #22d3ee; margin-bottom: 1.5rem;">What We Set Out to Answer</h3>
                 <div class="research-question">
@@ -1273,12 +1151,12 @@
                         Statistical Techniques
                     </h3>
                     <ul class="methods-list">
-                        <li><strong><a href="#glossary" class="glossary-link">Linear Regression</a>:</strong> Our baseline for estimating average effects</li>
-                        <li><strong><a href="#glossary" class="glossary-link">Random Forest Regression</a>:</strong> To detect nonlinear patterns</li>
-                        <li><strong><a href="#glossary" class="glossary-link">Rolling Average</a> & <a href="#glossary" class="glossary-link">Lagged Average</a>:</strong> To measure long-term effects of exposure</li>
-                        <li><strong><a href="#glossary" class="glossary-link">Interaction Models</a>:</strong> To see if development level (SDI) changes how PM₂.₅ affects health</li>
-                        <li><strong><a href="#glossary" class="glossary-link">Log-Transformed Regression</a>:</strong> For skewed data like COVID-19 deaths</li>
-                        <li><strong><a href="#glossary" class="glossary-link">Quantile Regression</a>:</strong> To see if impacts differ between high-burden vs low-burden countries</li>
+                        <li><strong>Linear Regression:</strong> Our baseline for estimating average effects</li>
+                        <li><strong>Random Forest Regression:</strong> To detect nonlinear patterns</li>
+                        <li><strong>Rolling & Lagged Averages:</strong> To measure long-term effects of exposure</li>
+                        <li><strong>Interaction Models:</strong> To see if development level (SDI) changes how PM₂.₅ affects health</li>
+                        <li><strong>Log-Transformed Regression:</strong> For skewed data like COVID-19 deaths</li>
+                        <li><strong>Quantile Regression:</strong> To see if impacts differ between high-burden vs low-burden countries</li>
                     </ul>
                 </div>
 
@@ -1298,8 +1176,8 @@
                         <p>Annual averages at country level from WHO Global Health Observatory</p>
                     </div>
                     <div class="source-item">
-                        <h4>Health Burden Data (<a href="#glossary" class="glossary-link">DALYs</a>)</h4>
-                        <p><a href="#glossary" class="glossary-link">Disability-Adjusted Life Years</a> from the IHME Global Burden of Disease study</p>
+                        <h4>Health Burden Data (DALYs)</h4>
+                        <p>Disability-Adjusted Life Years from the IHME Global Burden of Disease study</p>
                     </div>
                     <div class="source-item">
                         <h4>SDI (Socio-Demographic Index)</h4>
@@ -1308,7 +1186,7 @@
                     <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 6px;">
                         <p style="font-size: 0.9rem; color: #f1f5f9;">
                             We grouped our results by disease type: Cardiovascular disease, Stroke, Chronic respiratory disease, 
-                            All-cause <a href="#glossary" class="glossary-link">DALYs</a>, and COVID-19 mortality
+                            All-cause DALYs, and COVID-19 mortality
                         </p>
                     </div>
                 </div>
@@ -1331,11 +1209,11 @@
                     </div>
                     <h3>PM₂.₅ Hits Harder in Low-SDI Countries</h3>
                     <div class="stat">
-                        <div class="stat-value">0.72 <a href="#glossary" class="glossary-link">DALYs</a></div>
+                        <div class="stat-value">0.72 DALYs</div>
                         <div class="stat-description">per 100,000 people in low-SDI countries for 10 µg/m³ increase</div>
                     </div>
                     <div class="stat">
-                        <div class="stat-value">0.22 <a href="#glossary" class="glossary-link">DALYs</a></div>
+                        <div class="stat-value">0.22 DALYs</div>
                         <div class="stat-description">per 100,000 people in very high-SDI countries for same increase</div>
                     </div>
                     <p style="color: #475569; margin-top: 1rem;">
@@ -1349,7 +1227,7 @@
                     </div>
                     <h3>SDI Is the Strongest Predictor</h3>
                     <p style="color: #475569; margin-bottom: 1rem;">
-                        Socio-demographic development (SDI) consistently explains the largest share of variation in <a href="#glossary" class="glossary-link">DALYs</a> across countries.
+                        Socio-demographic development (SDI) consistently explains the largest share of variation in DALYs across countries.
                     </p>
                     <div class="stat">
                         <div class="stat-value">Primary Factor</div>
@@ -1363,7 +1241,7 @@
                     </div>
                     <h3>Pollution's Effects Are Cumulative</h3>
                     <p style="color: #475569; margin-bottom: 1rem;">
-                        Models that used 3–5 year <a href="#glossary" class="glossary-link">rolling averages</a> performed better than single-year exposure.
+                        Models that used 3–5 year rolling averages performed better than single-year exposure.
                     </p>
                     <div class="stat">
                         <div class="stat-value">Long-term Impact</div>
@@ -1413,7 +1291,7 @@
                         Prediction Parameters
                     </h3>
                     <p style="color: #64748b; margin-bottom: 1.5rem;">
-                        Choose a country and year to get predicted estimates of <a href="#glossary" class="glossary-link">DALYs</a>/100,000 for cardiovascular and respiratory diseases
+                        Choose a country and year to get predicted estimates of DALYs/100,000 for cardiovascular and respiratory diseases
                     </p>
 
                     <div class="form-group">
@@ -1479,7 +1357,7 @@
 
                         <div class="result-value">
                             <div class="result-number" id="result-daly">-</div>
-                            <div style="color: #f1f5f9;">Predicted <a href="#glossary" class="glossary-link">DALYs</a> Lost</div>
+                            <div style="color: #f1f5f9;">Predicted DALYs Lost</div>
                             <div style="color: #cbd5e1; font-size: 0.9rem; margin-top: 0.5rem;">per 100,000 population</div>
                         </div>
                     </div>
@@ -1488,50 +1366,8 @@
         </div>
     </section>
 
-    <!-- What Can Be Done Section -->
-    <section id="action-section" class="section action-section">
-        <div class="container">
-            <h2 class="section-title fade-in">What Can Be Done?</h2>
-            <p class="section-subtitle fade-in">
-                Everyone has a role to play in addressing air pollution and protecting public health
-            </p>
-
-            <div class="action-grid">
-                <div class="action-card fade-in interactive-element">
-                    <div class="action-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3>For Individuals</h3>
-                    <p>
-                        We all have a role to play when it comes to protecting our health. If you live in an area with high pollution, 
-                        try to check local air quality updates regularly and limit outdoor activity when levels are high, especially 
-                        vulnerable groups such as children, the elderly, and those with chronic conditions.
-                    </p>
-                    <p>
-                        Small actions like using air purifiers indoors or choosing cleaner modes of transport can also make a difference.
-                    </p>
-                </div>
-
-                <div class="action-card fade-in interactive-element">
-                    <div class="action-icon">
-                        <i class="fas fa-landmark"></i>
-                    </div>
-                    <h3>For Policymakers & Health Authorities</h3>
-                    <p>
-                        We urge governments and environmental agencies to go beyond general air quality indices and develop a 
-                        comprehensive <strong>Health-Adjusted Pollution Index</strong>, one that clearly links pollutant levels 
-                        to measurable health risks.
-                    </p>
-                    <p>
-                        This is about prioritizing health in every environmental policy.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Sources & Glossary Section -->
-    <section id="glossary" class="section sources-section">
+    <section class="section sources-section">
         <div class="container">
             <h2 class="section-title fade-in">Sources & Glossary</h2>
             
@@ -1561,43 +1397,23 @@
                         <tbody>
                             <tr>
                                 <td><strong>PM₂.₅</strong></td>
-                                <td>Fine particulate matter smaller than 2.5 micrometers in diameter. These airborne particles can penetrate deep into the lungs and enter the bloodstream, causing serious health effects.</td>
+                                <td>Fine particulate matter < 2.5 micrometers</td>
                             </tr>
                             <tr>
-                                <td><strong>DALYs (Disability-Adjusted Life Years)</strong></td>
-                                <td>A measure of overall disease burden, calculated as the sum of years of life lost due to premature death and years lived with disability.</td>
+                                <td><strong>DALYs</strong></td>
+                                <td>Disability-Adjusted Life Years: years of healthy life lost</td>
                             </tr>
                             <tr>
-                                <td><strong>SDI (Socio-Demographic Index)</strong></td>
-                                <td>A composite index combining income, education level, and fertility rate to represent a country's development level.</td>
+                                <td><strong>SDI</strong></td>
+                                <td>Socio-Demographic Index: composite of income, education, fertility</td>
                             </tr>
                             <tr>
                                 <td><strong>Rolling Average</strong></td>
-                                <td>A multi-year average of data used to smooth out year-to-year fluctuations and capture longer-term trends.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Lagged Average</strong></td>
-                                <td>An average of exposure values from previous years used to estimate delayed health effects of pollution.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Linear Regression</strong></td>
-                                <td>A basic statistical method that models the relationship between a continuous outcome and one or more predictors by fitting a straight line. Used as a baseline to estimate average effects of PM₂.₅.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Random Forest Regression</strong></td>
-                                <td>A machine learning method that uses an ensemble of decision trees to model complex and nonlinear relationships between variables. Helps detect patterns missed by linear models.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Log-Transformed Regression</strong></td>
-                                <td>A version of linear regression where the dependent variable (e.g., COVID-19 deaths) is log-transformed to handle skewed data and stabilize variance.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Interaction Models</strong></td>
-                                <td>Regression models that test whether the effect of one variable (e.g., PM₂.₅) changes depending on another (e.g., SDI), revealing effect modification.</td>
+                                <td>Multi-year average to smooth short-term fluctuations</td>
                             </tr>
                             <tr>
                                 <td><strong>Quantile Regression</strong></td>
-                                <td>A statistical technique that estimates relationships at different points (quantiles) of the outcome distribution, such as the 25th or 75th percentile. Useful for understanding how effects differ across countries with low vs. high disease burden.</td>
+                                <td>Method estimating effects at different outcome points</td>
                             </tr>
                         </tbody>
                     </table>
@@ -1611,14 +1427,14 @@
         <div class="container">
             <h2 class="section-title fade-in">About Atmosfear</h2>
             <p class="section-subtitle fade-in">
-                A student-led research project investigating the global health impacts of air pollution
+            
             </p>
 
             <div class="about-card fade-in interactive-element">
                 <h3>About Atmosfear</h3>
                 <p>
-                    <strong>Atmosfear</strong> is a student-led research project from the MIT Emerging Talent Program.
-                    We investigate the global health impacts of long-term exposure to air pollution, focusing on how 
+                    <strong>Atmosfear</strong> is a student-led data science research project from the MIT Emerging Talent Program.
+                    We investigate the global health impacts of long-term exposure to air pollution focusing on how 
                     socioeconomic disparities shape vulnerability.
                 </p>
                 <p>
@@ -1640,7 +1456,7 @@
             <div class="contact-section fade-in interactive-element">
                 <h4>Contact Us</h4>
                 <div class="contact-links">
-                    <a href="#" class="contact-link">
+                    <a href="https://github.com/MIT-Emerging-Talent/ET6-CDSP-group-09-repo" class="contact-link">
                         <i class="fab fa-github"></i> GitHub Repository
                     </a>
                     <a href="#" class="contact-link">
@@ -1804,31 +1620,6 @@
                 this.style.transform = 'scale(1)';
             });
         });
-
-        // Custom function to handle glossary links to prevent over-linking
-        function applyGlossaryLinks() {
-            const sections = document.querySelectorAll('section');
-            const linkedTerms = {}; // Track linked terms per section
-
-            sections.forEach(section => {
-                linkedTerms[section.id] = new Set();
-                const linksInThisSection = section.querySelectorAll('.glossary-link');
-
-                linksInThisSection.forEach(link => {
-                    const term = link.textContent.trim();
-                    // Only link if it's not PM₂.₅ or SDI, or if it's the first occurrence in this section
-                    if ((term === 'PM₂.₅' || term === 'SDI') && linkedTerms[section.id].has(term)) {
-                        link.outerHTML = link.textContent; // Remove link, keep text
-                    } else {
-                        linkedTerms[section.id].add(term);
-                    }
-                });
-            });
-        }
-
-        // Call the function after the DOM is loaded
-        document.addEventListener('DOMContentLoaded', applyGlossaryLinks);
-
     </script>
 </body>
 </html>
