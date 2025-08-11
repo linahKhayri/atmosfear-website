@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"name": "atmosfear-website",
+			"path": "."
+		},
+		{
+			"path": "../../../Downloads/uploads"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "atmosfear-website"
+	}
+}
