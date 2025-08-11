@@ -1442,90 +1442,22 @@
     </section>
 
     <!-- Data Tool Section -->
+<!-- Data Tool Section - Under Construction -->
     <section id="data-tool-section" class="section data-tool-section">
         <div class="container">
-            <h2 class="section-title fade-in">Try the Predictor Tool</h2>
+            <h2 class="section-title fade-in">Interactive Tool Coming Soon</h2>
             <p class="section-subtitle fade-in">
-                What if your country's PM₂.₅ levels rose by 10 µg/m³? Our tool lets you explore predicted health impacts.
+                We're working on an interactive predictor tool to help visualize the health impacts of PM₂.₅
             </p>
 
-            <div class="tool-grid">
-                <div class="tool-card fade-in interactive-element">
-                    <h3>
-                        <i class="fas fa-calculator icon"></i>
-                        Prediction Parameters
-                    </h3>
-                    <p style="color: #64748b; margin-bottom: 1.5rem;">
-                        Choose a country and year to get predicted estimates of <a href="#glossary" class="glossary-link">DALYs</a>/100,000 for cardiovascular and respiratory diseases
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <div class="visual-placeholder fade-in interactive-element" style="padding: 4rem 2rem; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);">
+                    <i class="fas fa-tools" style="font-size: 4rem; color: #22d3ee; margin-bottom: 1.5rem;"></i>
+                    <h3 style="color: white; font-size: 2rem; margin-bottom: 1rem;">Under Construction</h3>
+                    <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.6; margin-bottom: 2rem;">
+                        Our team is currently developing an interactive tool that will allow you to explore predicted health impacts based on PM₂.₅ levels and country development factors.
                     </p>
 
-                    <div class="form-group">
-                        <label for="country-select">Country</label>
-                        <select id="country-select" class="form-control">
-                            <option value="">Select a country</option>
-                            <option value="United States">United States</option>
-                            <option value="China">China</option>
-                            <option value="India">India</option>
-                            <option value="Germany">Germany</option>
-                            <option value="United Kingdom">United Kingdom</option>
-                            <option value="France">France</option>
-                            <option value="Italy">Italy</option>
-                            <option value="Spain">Spain</option>
-                            <option value="Canada">Canada</option>
-                            <option value="Australia">Australia</option>
-                            <option value="Japan">Japan</option>
-                            <option value="Brazil">Brazil</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="year-select">Year</label>
-                        <select id="year-select" class="form-control">
-                            <option value="">Select a year</option>
-                            <option value="2010">2010</option>
-                            <option value="2011">2011</option>
-                            <option value="2012">2012</option>
-                            <option value="2013">2013</option>
-                            <option value="2014">2014</option>
-                            <option value="2015">2015</option>
-                            <option value="2016">2016</option>
-                            <option value="2017">2017</option>
-                            <option value="2018">2018</option>
-                            <option value="2019">2019</option>
-                        </select>
-                    </div>
-
-                    <button id="predict-button" class="predict-button" disabled>Generate Prediction</button>
-                </div>
-
-                <div class="result-card fade-in">
-                    <div class="result-placeholder" id="result-placeholder">
-                        <i class="fas fa-chart-bar pulse"></i>
-                        <p>Select a country and year to see the prediction</p>
-                    </div>
-
-                    <div class="result-content" id="result-content">
-                        <h3 style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; color: white;">
-                            <i class="fas fa-heart" style="color: #fbbf24;"></i>
-                            Prediction Result
-                        </h3>
-
-                        <div style="margin-bottom: 1rem;">
-                            <span style="color: #cbd5e1;">Country:</span>
-                            <span style="color: #22d3ee; font-weight: bold; margin-left: 1rem;" id="result-country">-</span>
-                        </div>
-
-                        <div style="margin-bottom: 1rem;">
-                            <span style="color: #cbd5e1;">Year:</span>
-                            <span style="color: #22d3ee; font-weight: bold; margin-left: 1rem;" id="result-year">-</span>
-                        </div>
-
-                        <div class="result-value">
-                            <div class="result-number" id="result-daly">-</div>
-                            <div style="color: #f1f5f9;">Predicted <a href="#glossary" class="glossary-link">DALYs</a> Lost</div>
-                            <div style="color: #cbd5e1; font-size: 0.9rem; margin-top: 0.5rem;">per 100,000 population</div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -1706,92 +1638,7 @@
 
     <script>
         // Sample DALY data (will be replaced with real dataset)
-        const sampleDALYData = {
-            'United States': { 2010: 1250, 2015: 1180, 2019: 1120 },
-            'China': { 2010: 2800, 2015: 2650, 2019: 2500 },
-            'India': { 2010: 3200, 2015: 3100, 2019: 2950 },
-            'Germany': { 2010: 890, 2015: 820, 2019: 780 },
-            'United Kingdom': { 2010: 950, 2015: 880, 2019: 840 },
-            'France': { 2010: 920, 2015: 860, 2019: 810 },
-            'Italy': { 2010: 1100, 2015: 1020, 2019: 980 },
-            'Spain': { 2010: 980, 2015: 920, 2019: 880 },
-            'Canada': { 2010: 780, 2015: 720, 2019: 680 },
-            'Australia': { 2010: 650, 2015: 600, 2019: 570 },
-            'Japan': { 2010: 1150, 2015: 1080, 2019: 1020 },
-            'Brazil': { 2010: 1800, 2015: 1720, 2019: 1650 }
-        };
 
-        // DOM elements
-        const navbar = document.getElementById('navbar');
-        const countrySelect = document.getElementById('country-select');
-        const yearSelect = document.getElementById('year-select');
-        const predictButton = document.getElementById('predict-button');
-        const resultPlaceholder = document.getElementById('result-placeholder');
-        const resultContent = document.getElementById('result-content');
-        const resultCountry = document.getElementById('result-country');
-        const resultYear = document.getElementById('result-year');
-        const resultDALY = document.getElementById('result-daly');
-
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Update predict button state
-        function updatePredictButton() {
-            const hasCountry = countrySelect.value !== '';
-            const hasYear = yearSelect.value !== '';
-            predictButton.disabled = !(hasCountry && hasYear);
-        }
-
-        countrySelect.addEventListener('change', updatePredictButton);
-        yearSelect.addEventListener('change', updatePredictButton);
-
-        // Generate prediction
-        predictButton.addEventListener('click', function() {
-            const selectedCountry = countrySelect.value;
-            const selectedYear = parseInt(yearSelect.value);
-
-            if (selectedCountry && sampleDALYData[selectedCountry]) {
-                const countryData = sampleDALYData[selectedCountry];
-                let predictedValue;
-
-                if (countryData[selectedYear]) {
-                    predictedValue = countryData[selectedYear];
-                } else {
-                    // Linear interpolation
-                    const years = Object.keys(countryData).map(Number).sort();
-                    const values = years.map(y => countryData[y]);
-
-                    if (selectedYear < years[0]) {
-                        predictedValue = values[0];
-                    } else if (selectedYear > years[years.length - 1]) {
-                        predictedValue = values[values.length - 1];
-                    } else {
-                        for (let i = 0; i < years.length - 1; i++) {
-                            if (selectedYear >= years[i] && selectedYear <= years[i + 1]) {
-                                const ratio = (selectedYear - years[i]) / (years[i + 1] - years[i]);
-                                predictedValue = values[i] + ratio * (values[i + 1] - values[i]);
-                                break;
-                            }
-                        }
-                    }
-                }
-
-                // Update result display
-                resultCountry.textContent = selectedCountry;
-                resultYear.textContent = selectedYear;
-                resultDALY.textContent = Math.round(predictedValue).toLocaleString();
-
-                // Show result
-                resultPlaceholder.style.display = 'none';
-                resultContent.classList.add('active');
-            }
-        });
 
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
