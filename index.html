@@ -1475,7 +1475,7 @@
                 <h3><i class="fas fa-globe icon"></i> Select Parameters</h3>
                 <div class="form-group">
                     <label for="country">Country</label>
-                    <select id="country" class="form-control" placeholder="Select or type to search">
+                    <select id="country" class="form-control" style="height: auto;" placeholder="Select or type to search">
                         <option value="">Select a country...</option>
                         <!-- Countries populated by JavaScript -->
                     </select>
@@ -1536,6 +1536,16 @@ const validCountries = [
     "Zambia", "Zimbabwe"
 ];
 
+
+
+// SDI classification system
+const sdiRanges = [
+    { max: 0.45, label: "Low" },
+    { max: 0.61, label: "Medium" },
+    { max: 0.75, label: "High" },
+    { max: 1.0, label: "Very High" }
+];
+
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {
     const countrySelect = document.getElementById('country');
@@ -1544,7 +1554,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Populate country dropdown (sorted)
     validCountries.sort().forEach(country => {
         const option = document.createElement('option');
-        option.value = country.toLowerCase(); // API expects lowercase
+        option.value = country.toLowerCase();
         option.textContent = country;
         countrySelect.appendChild(option);
     });
@@ -1557,27 +1567,55 @@ document.addEventListener('DOMContentLoaded', function() {
         option.textContent = year;
         yearSelect.appendChild(option);
         
-        // Set current year as default
         if (year === currentYear) {
             option.selected = true;
         }
     }
     
-    // Make country dropdown searchable
+    // Improved dropdown behavior
+    let isUserTyping = false;
+    
+    countrySelect.addEventListener('focus', function() {
+        this.size = 5;
+        Array.from(this.options).forEach(opt => opt.style.display = '');
+    });
+    
+    countrySelect.addEventListener('blur', function() {
+        this.size = 1;
+        isUserTyping = false;
+    });
+    
     countrySelect.addEventListener('input', function() {
+        isUserTyping = true;
         const searchTerm = this.value.toLowerCase();
-        const options = this.options;
-        
-        for (let i = 0; i < options.length; i++) {
-            const option = options[i];
-            if (option.textContent.toLowerCase().includes(searchTerm)) {
-                option.style.display = '';
-            } else {
-                option.style.display = 'none';
-            }
+        Array.from(this.options).forEach(option => {
+            option.style.display = option.value === '' || 
+                                 option.textContent.toLowerCase().includes(searchTerm) 
+                                 ? '' : 'none';
+        });
+    });
+    
+    countrySelect.addEventListener('change', function() {
+        if (!isUserTyping) {
+            Array.from(this.options).forEach(opt => opt.style.display = '');
         }
+        isUserTyping = false;
+    });
+    
+    countrySelect.addEventListener('mousedown', function() {
+        Array.from(this.options).forEach(opt => opt.style.display = '');
     });
 });
+
+// Get SDI level description
+function getSdiLevel(sdiValue) {
+    for (const range of sdiRanges) {
+        if (sdiValue <= range.max) {
+            return range.label;
+        }
+    }
+    return "Unknown";
+}
 
 // Prediction function
 document.getElementById("predictBtn").addEventListener("click", async function() {
@@ -1619,6 +1657,7 @@ document.getElementById("predictBtn").addEventListener("click", async function()
         `;
         
         data.output.forEach(item => {
+            const sdiLevel = getSdiLevel(item["SDI"]);
             html += `
                 <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 10px; border-left: 4px solid #22d3ee;">
                     <h4 style="color: #fbbf24; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
@@ -1637,19 +1676,42 @@ document.getElementById("predictBtn").addEventListener("click", async function()
                     </div>
                     <div style="margin-top: 0.5rem;">
                         <div style="font-size: 0.8rem; color: #94a3b8;">Development Index (SDI)</div>
-                        <div style="font-weight: bold; color: white;">${item["SDI"].toFixed(3)}</div>
+                        <div style="font-weight: bold; color: white;">
+                            ${item["SDI"].toFixed(3)} 
+                            <span style="font-size: 0.9rem; color: #fbbf24;">(${sdiLevel})</span>
+                        </div>
                     </div>
                 </div>
             `;
         });
         
+        // Add SDI and DALY explanations
         html += `
             </div>
-            <div style="margin-top: 2rem; background: rgba(34, 211, 238, 0.1); padding: 1rem; border-radius: 8px; border-left: 4px solid #22d3ee;">
-                <p style="color: #e2e8f0; font-size: 0.9rem; margin: 0;">
+            <div style="margin-top: 2rem; background: rgba(34, 211, 238, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #22d3ee;">
+                <h4 style="color: #22d3ee; margin-bottom: 1rem;">
                     <i class="fas fa-info-circle" style="margin-right: 0.5rem;"></i>
-                    DALY = Disability-Adjusted Life Years (a measure of overall disease burden)
-                </p>
+                    Understanding the Metrics
+                </h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                    <div>
+                        <h5 style="color: #fbbf24; margin-bottom: 0.5rem;">SDI Levels</h5>
+                        <ul style="color: #e2e8f0; font-size: 0.9rem; line-height: 1.6; padding-left: 1.2rem;">
+                            <li><strong>0.0 - 0.45:</strong> Low development</li>
+                            <li><strong>0.45 - 0.61:</strong> Medium development</li>
+                            <li><strong>0.61 - 0.75:</strong> High development</li>
+                            <li><strong>0.75 - 1.0:</strong> Very high development</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 style="color: #fbbf24; margin-bottom: 0.5rem;">DALY Meaning</h5>
+                        <p style="color: #e2e8f0; font-size: 0.9rem; line-height: 1.6;">
+                            <strong>Disability-Adjusted Life Years</strong> measure overall disease burden, 
+                            representing years lost due to ill-health, disability, or early death. 
+                            Lower values indicate better population health.
+                        </p>
+                    </div>
+                </div>
             </div>
         `;
         
@@ -1662,9 +1724,6 @@ document.getElementById("predictBtn").addEventListener("click", async function()
                 <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 1rem;"></i>
                 <h4>Error Loading Data</h4>
                 <p>${error.message || 'Failed to fetch data from the server'}</p>
-                <p style="font-size: 0.9rem; margin-top: 0.5rem;">
-                    Please ensure you've selected valid parameters and try again.
-                </p>
                 <button onclick="window.location.reload()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: #ef4444; color: white; border: none; border-radius: 4px; cursor: pointer;">
                     Try Again
                 </button>
@@ -1681,6 +1740,7 @@ function getIconForCategory(category) {
     if (category.includes('COVID')) return 'virus';
     return 'chart-line';
 }
+
 </script>
     <!-- What Can Be Done Section -->
     <section id="action-section" class="section action-section">
