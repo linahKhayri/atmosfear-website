@@ -501,25 +501,61 @@
             align-items: center;
             gap: 1rem;
         }
+        .methods-table {
+    display: table;
+    width: 100%;
+        }
+
+        .method-row {
+            display: table-row;
+            margin-bottom: 1rem;
+        }
+
+        .method-name {
+            display: table-cell;
+            width: 40%;
+            padding-right: 1rem;
+            padding-bottom: 1rem;
+            vertical-align: top;
+            color: #334155;
+        }
+
+        .method-desc {
+            display: table-cell;
+            width: 60%;
+            padding-bottom: 1rem;
+            vertical-align: top;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        .method-arrow {
+            color: #06b6d4;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+        }
 
         .methods-list {
             list-style: none;
         }
 
-        .methods-list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            color: #334155;
-        }
+            .methods-list li {
+                display: flex;
+                align-items: flex-start;
+                gap: 0.75rem;
+                margin-bottom: 1rem;
+                color: #334155;
+                line-height: 1.6;
+            }
 
-        .methods-list li::before {
-            content: "▶";
-            color: #06b6d4;
-            font-size: 0.8rem;
-            margin-top: 0.3rem;
-        }
+            .methods-list li::before {
+                content: "▶";
+                color: #06b6d4;
+                font-size: 0.8rem;
+                margin-top: 0.3rem;
+                flex-shrink: 0; /* Prevents the arrow from shrinking */
+                width: 12px; /* Fixed width for consistent alignment */
+            }
 
         .data-sources {
             background: linear-gradient(135deg, #1b3f46 0%, #0891b2 100%);
@@ -1275,14 +1311,55 @@
                         <i class="fas fa-chart-line" style="color: #06b6d4;"></i>
                         Statistical Techniques
                     </h3>
-                    <ul class="methods-list">
-                        <li><strong><a href="#glossary" class="glossary-link">Linear Regression</a>:</strong> Our baseline for estimating average effects</li>
-                        <li><strong><a href="#glossary" class="glossary-link">Random Forest Regression</a>:</strong> To detect nonlinear patterns</li>
-                        <li><strong><a href="#glossary" class="glossary-link">Rolling Average</a> & <a href="#glossary" class="glossary-link">Lagged Average</a>:</strong> To measure long-term effects of exposure</li>
-                        <li><strong><a href="#glossary" class="glossary-link">Interaction Models</a>:</strong> To see if development level (SDI) changes how PM₂.₅ affects health</li>
-                        <li><strong><a href="#glossary" class="glossary-link">Log-Transformed Regression</a>:</strong> For skewed data like COVID-19 deaths</li>
-                        <li><strong><a href="#glossary" class="glossary-link">Quantile Regression</a>:</strong> To see if impacts differ between high-burden vs low-burden countries</li>
-                    </ul>
+                    <div class="methods-table">
+                        <div class="method-row">
+                            <div class="method-name">
+                                <span class="method-arrow">▶</span>
+                                <strong><a href="#glossary" class="glossary-link">Linear Regression</a>:</strong>
+                            </div>
+                            <div class="method-desc">Our baseline for estimating average effects</div>
+                        </div>
+                        
+                        <div class="method-row">
+                            <div class="method-name">
+                                <span class="method-arrow">▶</span>
+                                <strong><a href="#glossary" class="glossary-link">Random Forest Regression</a>:</strong>
+                            </div>
+                            <div class="method-desc">To detect nonlinear patterns</div>
+                        </div>
+                        
+                        <div class="method-row">
+                            <div class="method-name">
+                                <span class="method-arrow">▶</span>
+                                <strong><a href="#glossary" class="glossary-link">Rolling Average</a> & <a href="#glossary" class="glossary-link">Lagged Average</a>:</strong>
+                            </div>
+                            <div class="method-desc">To measure long-term effects of exposure</div>
+                        </div>
+                        
+                        <div class="method-row">
+                            <div class="method-name">
+                                <span class="method-arrow">▶</span>
+                                <strong><a href="#glossary" class="glossary-link">Interaction Models</a>:</strong>
+                            </div>
+                            <div class="method-desc">To see if development level (SDI) changes how PM₂.₅ affects health</div>
+                        </div>
+                        
+                        <div class="method-row">
+                            <div class="method-name">
+                                <span class="method-arrow">▶</span>
+                                <strong><a href="#glossary" class="glossary-link">Log-Transformed Regression</a>:</strong>
+                            </div>
+                            <div class="method-desc">For skewed data like COVID-19 deaths</div>
+                        </div>
+                        
+                        <div class="method-row">
+                            <div class="method-name">
+                                <span class="method-arrow">▶</span>
+                                <strong><a href="#glossary" class="glossary-link">Quantile Regression</a>:</strong>
+                            </div>
+                            <div class="method-desc">To see if impacts differ between high-burden vs low-burden countries</div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="methods-visual fade-in">
@@ -1642,6 +1719,7 @@ document.getElementById("predictBtn").addEventListener("click", async function()
     const placeholder = document.getElementById("placeholder");
     const loadingMessage = document.getElementById('loadingMessage');
     
+    
     if (!country || !year) {
         alert("Please select both country and year.");
         return;
@@ -1665,10 +1743,14 @@ document.getElementById("predictBtn").addEventListener("click", async function()
         loadingMessage.style.display = 'none';
         
         // Build results display
+        const capitalizedCountry = data.country
+            .split(' ')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
         let html = `
             <h3 style="text-align:center; margin-bottom:1.5rem; color:#22d3ee;">
                 <i class="fas fa-chart-pie" style="margin-right: 0.5rem;"></i>
-                Health Profile for <span style="color:#fbbf24;">${data.country}</span> in ${data.year}
+                Health Profile for <span style="color:#fbbf24;">${capitalizedCountry}</span> in ${data.year}
             </h3>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
         `;
