@@ -1583,13 +1583,8 @@ document.addEventListener('DOMContentLoaded', function() {
     let isUserTyping = false;
     
     countrySelect.addEventListener('focus', function() {
-        this.size = 5;
+        this.size = 16;
         Array.from(this.options).forEach(opt => opt.style.display = '');
-    });
-    
-    countrySelect.addEventListener('blur', function() {
-        this.size = 1;
-        isUserTyping = false;
     });
     
     countrySelect.addEventListener('input', function() {
@@ -1603,14 +1598,28 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     countrySelect.addEventListener('change', function() {
-        if (!isUserTyping) {
-            Array.from(this.options).forEach(opt => opt.style.display = '');
-        }
+        // When a country is selected, immediately close the dropdown
+        this.size = 1;
+        this.blur(); // Remove focus to close dropdown
         isUserTyping = false;
+        // Reset all options to be visible for next time
+        Array.from(this.options).forEach(opt => opt.style.display = '');
     });
     
     countrySelect.addEventListener('mousedown', function() {
-        Array.from(this.options).forEach(opt => opt.style.display = '');
+        if (!isUserTyping) {
+            Array.from(this.options).forEach(opt => opt.style.display = '');
+        }
+    });
+    
+    // Handle keyboard navigation
+    countrySelect.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === 'Escape') {
+            this.size = 1;
+            this.blur();
+            isUserTyping = false;
+            Array.from(this.options).forEach(opt => opt.style.display = '');
+        }
     });
 });
 
