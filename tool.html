@@ -255,7 +255,6 @@
             const forecast = apiJson?.forecast || {};
             const predictions = forecast?.predictions || {};
             const countryInfo = forecast?.country_info || {};
-            const analysisType = forecast?.analysis_type || 'Unknown';
             
             const tiles = [
                 { label: 'All-cause DALYs', value: predictions['All-cause DALYs'] },
@@ -267,8 +266,7 @@
             return `
                 <h3 style="text-align:center; margin-bottom:1.5rem; color:#22d3ee;">
                     <i class="fas fa-chart-pie" style="margin-right: 0.5rem;"></i>
-                    ${countryInfo.country || apiJson.country || ''} — ${year} 
-                    <span style="color:#fbbf24;">(${analysisType})</span>
+                    ${countryInfo.country || apiJson.country || ''} — ${year}
                 </h3>
                 <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;">
                     ${tiles.map(t => `
@@ -326,26 +324,20 @@
             return `
                 <h3 style="text-align:center; margin-bottom:1.5rem; color:#22d3ee;">
                     <i class="fas fa-database" style="margin-right: 0.5rem;"></i>
-                    ${profile.country || apiJson.country || ''} — Profile ${profile.current_year ? '(' + profile.current_year + ')' : ''}
+                    ${profile.country || apiJson.country || ''} — Current Profile
                 </h3>
                 <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
                     <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px;">
                         <div style="display:flex; align-items:center; gap:0.5rem; color:#94a3b8; font-size:0.9rem;">
                             <i class="fas fa-smog" style="color:#22d3ee;"></i><span>Current PM₂.₅</span>
                         </div>
-                        <div style="color:white; font-weight:bold;">${formatNumber(profile.current_pm25)} µg/m³</div>
+                        <div style="color:white; font-weight:bold;">${formatNumber(apiJson.pm25)} µg/m³</div>
                     </div>
                     <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px;">
                         <div style="display:flex; align-items:center; gap:0.5rem; color:#94a3b8; font-size:0.9rem;">
                             <i class="fas fa-chart-line" style="color:#22d3ee;"></i><span>Country SDI</span>
                         </div>
                         <div style="color:white; font-weight:bold;">${formatNumber(profile.country_sdi)}</div>
-                    </div>
-                    <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px;">
-                        <div style="display:flex; align-items:center; gap:0.5rem; color:#94a3b8; font-size:0.9rem;">
-                            <i class="fas fa-filter" style="color:#22d3ee;"></i><span>Scenario PM₂.₅</span>
-                        </div>
-                        <div style="color:white; font-weight:bold;">${formatNumber(apiJson.pm25)} µg/m³</div>
                     </div>
                     <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px;">
                         <div style="display:flex; align-items:center; gap:0.5rem; color:#94a3b8; font-size:0.9rem;">
