@@ -51,6 +51,11 @@
         .footer { background: #0f172a; color: #94a3b8; padding: 2rem 0; margin-top: 40px; }
         .footer a { color: #22d3ee; text-decoration: none; }
 
+        .insights-section { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); }
+        .insight-item { background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border-left: 3px solid #fbbf24; }
+        .insight-item h5 { color: #fbbf24; margin-bottom: 0.5rem; font-size: 0.9rem; text-transform: uppercase; font-weight: 600; }
+        .insight-item p { color: #e2e8f0; font-size: 0.9rem; line-height: 1.5; }
+
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .mobile-menu { display: block; }
@@ -114,14 +119,14 @@
                     <select id="global-year" class="form-control"><option value="">Select a year...</option></select>
                 </div>
                 <div class="help">
-                    Tip: Years 2010–2019 show actual values; 2020–2030 show model predictions.
+                    Select any country and year from 2010-2030 to explore data and predictions.
                 </div>
             </div>
 
             <div class="tool-grid">
                 <div>
                     <div class="tool-card">
-                        <h3><i class="fas fa-chart-line"></i> Predictor</h3>
+                        <h3><i class="fas fa-chart-line"></i> Health Impact Predictor</h3>
                         <button id="predictBtnPred" class="predict-button">Generate Prediction</button>
                         <p id="loadingMessagePred" style="display:none; font-size:0.9rem; color:#64748b; margin-top: 1rem;"><i class="fas fa-spinner fa-spin"></i> Loading data...</p>
                         <div class="help" style="margin-top: 1rem;">
@@ -143,7 +148,7 @@
                         <p style="font-size:0.9rem; color:#64748b; margin:0;">Auto-updates when you choose a country</p>
                         <p id="loadingMessageProf" style="display:none; font-size:0.9rem; color:#64748b; margin-top: 0.75rem;"><i class="fas fa-spinner fa-spin"></i> Loading data...</p>
                         <div class="help" style="margin-top: 1rem;">
-                            Shows Current PM₂.₅, and modelled DALYs predictions for the selected country.
+                            Shows current PM₂.₅ levels and detailed health insights for the selected country.
                         </div>
                     </div>
                     <div class="result-card" id="resultProf" style="margin-top: 1rem;">
@@ -174,8 +179,8 @@
                         <p>Fine particulate matter smaller than 2.5 micrometers. WHO guideline is 5 μg/m³ annual average. Values above 15 μg/m³ are considered unhealthy.</p>
                     </div>
                     <div class="explanation-card">
-                        <h3><i class="fas fa-calendar-alt"></i> Predictions vs Actuals</h3>
-                        <p>Years 2010-2019 show actual historical data. Years 2020-2030 show model predictions based on trends and development patterns.</p>
+                        <h3><i class="fas fa-calendar-alt"></i> Analysis Types</h3>
+                        <p>The tool provides both historical data analysis and future forecasts based on current trends and development patterns.</p>
                     </div>
                 </div>
             </div>
@@ -223,27 +228,47 @@
             "Zambia","Zimbabwe"
         ];
 
-        function resolveForecastBucket(year){ const y = Number(year); if (y>=2010 && y<=2019) return 'actual_values'; if (y>=2020 && y<=2030) return 'predictions'; throw new Error('Year must be between 2010 and 2030.'); }
-        async function fetchAtmosfearData(country, year){ const url = `${API_BASE_URL}?country=${encodeURIComponent(country)}&year=${encodeURIComponent(year)}`; const response = await fetch(url, { headers: { 'Accept': 'application/json' } }); if (!response.ok) throw new Error(`API error: ${response.status}`); return response.json(); }
-        function formatNumber(value){ if (value===null || value===undefined || Number.isNaN(value)) return '—'; const num = Number(value); if (!Number.isFinite(num)) return '—'; return num.toLocaleString(undefined, { maximumFractionDigits: 2 }); }
-        function getDiseaseIcon(d){ const t = String(d||'').toLowerCase(); if (t.includes('cardio')) return 'heartbeat'; if (t.includes('respiratory')) return 'lungs'; if (t.includes('stroke')) return 'brain'; if (t.includes('all-cause')) return 'notes-medical'; return 'chart-line'; }
+        async function fetchAtmosfearData(country, year) {
+            const url = `${API_BASE_URL}?country=${encodeURIComponent(country)}&year=${encodeURIComponent(year)}`;
+            const response = await fetch(url, { headers: { 'Accept': 'application/json' } });
+            if (!response.ok) throw new Error(`API error: ${response.status}`);
+            return response.json();
+        }
 
-        function buildPredictorHTML(apiJson, year){
-            const bucket = resolveForecastBucket(year);
-            const forecast = apiJson?.forecast ?? {};
-            const dalys = forecast?.[bucket] ?? {};
-            const info = forecast?.country_info ?? {};
-            const bucketLabel = bucket === 'actual_values' ? 'Actual (2010–2019)' : 'Predicted (2020–2030)';
+        function formatNumber(value) {
+            if (value === null || value === undefined || Number.isNaN(value)) return '—';
+            const num = Number(value);
+            if (!Number.isFinite(num)) return '—';
+            return num.toLocaleString(undefined, { maximumFractionDigits: 2 });
+        }
+
+        function getDiseaseIcon(disease) {
+            const d = String(disease || '').toLowerCase();
+            if (d.includes('cardio')) return 'heartbeat';
+            if (d.includes('respiratory')) return 'lungs';
+            if (d.includes('stroke')) return 'brain';
+            if (d.includes('all-cause')) return 'notes-medical';
+            return 'chart-line';
+        }
+
+        function buildPredictorHTML(apiJson, year) {
+            const forecast = apiJson?.forecast || {};
+            const predictions = forecast?.predictions || {};
+            const countryInfo = forecast?.country_info || {};
+            const analysisType = forecast?.analysis_type || 'Unknown';
+            
             const tiles = [
-                { label: 'All-cause DALYs', value: dalys['All-cause DALYs'] },
-                { label: 'Cardiovascular DALYs', value: dalys['Cardiovascular DALYs'] },
-                { label: 'Respiratory DALYs', value: dalys['Respiratory DALYs'] },
-                { label: 'Stroke DALYs', value: dalys['Stroke DALYs'] }
+                { label: 'All-cause DALYs', value: predictions['All-cause DALYs'] },
+                { label: 'Cardiovascular DALYs', value: predictions['Cardiovascular DALYs'] },
+                { label: 'Respiratory DALYs', value: predictions['Respiratory DALYs'] },
+                { label: 'Stroke DALYs', value: predictions['Stroke DALYs'] }
             ];
+
             return `
                 <h3 style="text-align:center; margin-bottom:1.5rem; color:#22d3ee;">
                     <i class="fas fa-chart-pie" style="margin-right: 0.5rem;"></i>
-                    ${apiJson?.country ?? info?.country ?? ''} — ${year} <span style="color:#fbbf24;">${bucketLabel}</span>
+                    ${countryInfo.country || apiJson.country || ''} — ${year} 
+                    <span style="color:#fbbf24;">(${analysisType})</span>
                 </h3>
                 <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;">
                     ${tiles.map(t => `
@@ -258,127 +283,228 @@
                 </div>
                 <div style="margin-top:1.25rem; display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
                     <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px;">
-                        <div style="display:flex; align-items:center; gap:0.5rem; color:#94a3b8; font-size:0.9rem;"><i class="fas fa-chart-line" style="color:#22d3ee;"></i><span>SDI</span></div>
-                        <div style="color:white; font-weight:bold;">${formatNumber(info?.sdi)}</div>
+                        <div style="display:flex; align-items:center; gap:0.5rem; color:#94a3b8; font-size:0.9rem;">
+                            <i class="fas fa-chart-line" style="color:#22d3ee;"></i><span>SDI</span>
+                        </div>
+                        <div style="color:white; font-weight:bold;">${formatNumber(countryInfo.sdi)}</div>
                     </div>
                     <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px;">
-                        <div style="display:flex; align-items:center; gap:0.5rem; color:#94a3b8; font-size:0.9rem;"><i class="fas fa-layer-group" style="color:#22d3ee;"></i><span>SDI Category</span></div>
-                        <div style="color:white; font-weight:bold;">${info?.sdi_category ?? '—'}</div>
+                        <div style="display:flex; align-items:center; gap:0.5rem; color:#94a3b8; font-size:0.9rem;">
+                            <i class="fas fa-layer-group" style="color:#22d3ee;"></i><span>SDI Category</span>
+                        </div>
+                        <div style="color:white; font-weight:bold;">${countryInfo.sdi_category || '—'}</div>
                     </div>
                     <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px;">
-                        <div style="display:flex; align-items:center; gap:0.5rem; color:#94a3b8; font-size:0.9rem;"><i class="fas fa-smog" style="color:#22d3ee;"></i><span>PM₂.₅ (country-year)</span></div>
-                        <div style="color:white; font-weight:bold;">${formatNumber(info?.pm25)} µg/m³</div>
+                        <div style="display:flex; align-items:center; gap:0.5rem; color:#94a3b8; font-size:0.9rem;">
+                            <i class="fas fa-smog" style="color:#22d3ee;"></i><span>PM₂.₅</span>
+                        </div>
+                        <div style="color:white; font-weight:bold;">${formatNumber(countryInfo.pm25)} µg/m³</div>
                     </div>
                 </div>
             `;
         }
 
-        function buildProfileHTML(apiJson){
-            const p = apiJson?.profile ?? {};
-            const f = p?.forecasts ?? {};
+        function buildProfileHTML(apiJson) {
+            const profile = apiJson?.profile || {};
+            const forecasts = profile?.forecasts || {};
+            const insights = apiJson?.insights || {};
+            
             const tiles = [
-                { label: 'All-cause DALYs', value: f['All-cause DALYs']?.predicted_dalys },
-                { label: 'Cardiovascular DALYs', value: f['Cardiovascular DALYs']?.predicted_dalys },
-                { label: 'Respiratory DALYs', value: f['Respiratory DALYs']?.predicted_dalys },
-                { label: 'Stroke DALYs', value: f['Stroke DALYs']?.predicted_dalys }
+                { label: 'All-cause DALYs', value: forecasts['All-cause DALYs']?.predicted_dalys },
+                { label: 'Cardiovascular DALYs', value: forecasts['Cardiovascular DALYs']?.predicted_dalys },
+                { label: 'Respiratory DALYs', value: forecasts['Respiratory DALYs']?.predicted_dalys },
+                { label: 'Stroke DALYs', value: forecasts['Stroke DALYs']?.predicted_dalys }
             ];
+
+            const keyInsights = [
+                { title: 'Context', content: insights.context?.replace(/\*\*/g, '') },
+                { title: 'Health Burden', content: insights.health_burden?.replace(/\*\*/g, '') },
+                { title: 'PM₂.₅ Change', content: insights.pm25_change?.replace(/\*\*/g, '') },
+                { title: 'PM₂.₅ Level Assessment', content: insights.pm25_implication?.replace(/\*\*/g, '') }
+            ].filter(insight => insight.content);
+
             return `
                 <h3 style="text-align:center; margin-bottom:1.5rem; color:#22d3ee;">
                     <i class="fas fa-database" style="margin-right: 0.5rem;"></i>
-                    ${p?.country ?? apiJson?.country ?? ''} — Current Profile ${p?.current_year ? '(' + p.current_year + ')' : ''}
+                    ${profile.country || apiJson.country || ''} — Profile ${profile.current_year ? '(' + profile.current_year + ')' : ''}
                 </h3>
                 <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
                     <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px;">
-                        <div style="display:flex; align-items:center; gap:0.5rem; color:#94a3b8; font-size:0.9rem;"><i class="fas fa-smog" style="color:#22d3ee;"></i><span>Current PM₂.₅</span></div>
-                        <div style="color:white; font-weight:bold;">${formatNumber(p?.current_pm25)} µg/m³</div>
+                        <div style="display:flex; align-items:center; gap:0.5rem; color:#94a3b8; font-size:0.9rem;">
+                            <i class="fas fa-smog" style="color:#22d3ee;"></i><span>Current PM₂.₅</span>
+                        </div>
+                        <div style="color:white; font-weight:bold;">${formatNumber(profile.current_pm25)} µg/m³</div>
                     </div>
                     <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px;">
-                        <div style="display:flex; align-items:center; gap:0.5rem; color:#94a3b8; font-size:0.9rem;"><i class="fas fa-chart-line" style="color:#22d3ee;"></i><span>Country SDI</span></div>
-                        <div style="color:white; font-weight:bold;">${formatNumber(p?.country_sdi)}</div>
+                        <div style="display:flex; align-items:center; gap:0.5rem; color:#94a3b8; font-size:0.9rem;">
+                            <i class="fas fa-chart-line" style="color:#22d3ee;"></i><span>Country SDI</span>
+                        </div>
+                        <div style="color:white; font-weight:bold;">${formatNumber(profile.country_sdi)}</div>
                     </div>
                     <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px;">
-                        <div style="display:flex; align-items:center; gap:0.5rem; color:#94a3b8; font-size:0.9rem;"><i class="fas fa-filter" style="color:#22d3ee;"></i><span>Input PM₂.₅</span></div>
-                        <div style="color:white; font-weight:bold;">${formatNumber(p?.input_pm25)} µg/m³</div>
+                        <div style="display:flex; align-items:center; gap:0.5rem; color:#94a3b8; font-size:0.9rem;">
+                            <i class="fas fa-filter" style="color:#22d3ee;"></i><span>Scenario PM₂.₅</span>
+                        </div>
+                        <div style="color:white; font-weight:bold;">${formatNumber(apiJson.pm25)} µg/m³</div>
                     </div>
                     <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px;">
-                        <div style="display:flex; align-items:center; gap:0.5rem; color:#94a3b8; font-size:0.9rem;"><i class="fas fa-arrow-trend-down" style="color:#22d3ee;"></i><span>PM₂.₅ Change</span></div>
-                        <div style="color:white; font-weight:bold;">${formatNumber(p?.pm25_change)}</div>
+                        <div style="display:flex; align-items:center; gap:0.5rem; color:#94a3b8; font-size:0.9rem;">
+                            <i class="fas fa-arrow-trend-down" style="color:#22d3ee;"></i><span>PM₂.₅ Change</span>
+                        </div>
+                        <div style="color:white; font-weight:bold;">${formatNumber(profile.pm25_change)} µg/m³</div>
                     </div>
                 </div>
                 <div style="margin-top:1.25rem;">
-                    <h4 style="color:#fbbf24; margin-bottom:0.75rem; display:flex; align-items:center; gap:0.5rem;"><i class="fas fa-wave-square" style="color:#fbbf24;"></i> Predicted DALYs (profile)</h4>
+                    <h4 style="color:#fbbf24; margin-bottom:0.75rem; display:flex; align-items:center; gap:0.5rem;">
+                        <i class="fas fa-wave-square" style="color:#fbbf24;"></i> Predicted DALYs
+                    </h4>
                     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;">
                         ${tiles.map(t => `
                             <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; border-left: 4px solid #22d3ee;">
-                                <div style="display:flex; align-items:center; gap:0.5rem; color:#94a3b8; font-size:0.9rem; margin-bottom:0.25rem;"><i class="fas fa-${getDiseaseIcon(t.label)}" style="color:#22d3ee;"></i><span>${t.label}</span></div>
+                                <div style="display:flex; align-items:center; gap:0.5rem; color:#94a3b8; font-size:0.9rem; margin-bottom:0.25rem;">
+                                    <i class="fas fa-${getDiseaseIcon(t.label)}" style="color:#22d3ee;"></i>
+                                    <span>${t.label}</span>
+                                </div>
                                 <div style="color:white; font-weight:bold; font-size:1.25rem;">${formatNumber(t.value)}</div>
                             </div>
                         `).join('')}
                     </div>
                 </div>
+                ${keyInsights.length > 0 ? `
+                <div class="insights-section">
+                    <h4 style="color:#fbbf24; margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem;">
+                        <i class="fas fa-lightbulb" style="color:#fbbf24;"></i> Key Insights
+                    </h4>
+                    ${keyInsights.map(insight => `
+                        <div class="insight-item">
+                            <h5>${insight.title}</h5>
+                            <p>${insight.content}</p>
+                        </div>
+                    `).join('')}
+                </div>
+                ` : ''}
             `;
         }
 
-        function populateCountries(selectId){ const sel = document.getElementById(selectId); validCountries.slice().sort().forEach(c => { const o = document.createElement('option'); o.value = c; o.textContent = c; sel.appendChild(o); }); }
-        function populateYears(selectId){ const sel = document.getElementById(selectId); for (let y=2010; y<=2030; y++){ const o = document.createElement('option'); o.value = String(y); o.textContent = String(y); sel.appendChild(o);} }
-        function setProfileLoading(isLoading){ const loading = document.getElementById('loadingMessageProf'); loading.style.display = isLoading ? 'block' : 'none'; }
+        function populateCountries(selectId) {
+            const select = document.getElementById(selectId);
+            validCountries.slice().sort().forEach(country => {
+                const option = document.createElement('option');
+                option.value = country;
+                option.textContent = country;
+                select.appendChild(option);
+            });
+        }
 
-        async function loadCountryProfile(country){
+        function populateYears(selectId) {
+            const select = document.getElementById(selectId);
+            for (let year = 2010; year <= 2028; year++) {
+                const option = document.createElement('option');
+                option.value = String(year);
+                option.textContent = String(year);
+                select.appendChild(option);
+            }
+        }
+
+        function setProfileLoading(isLoading) {
+            const loading = document.getElementById('loadingMessageProf');
+            loading.style.display = isLoading ? 'block' : 'none';
+        }
+
+        function setPredictorLoading(isLoading) {
+            const loading = document.getElementById('loadingMessagePred');
+            loading.style.display = isLoading ? 'block' : 'none';
+        }
+
+        async function loadCountryProfile(country) {
             const resultDiv = document.getElementById('resultContentProf');
             const placeholder = document.getElementById('placeholderProf');
+            
             if (!country) return;
+            
             try {
                 placeholder.style.display = 'none';
                 setProfileLoading(true);
                 resultDiv.innerHTML = '';
                 resultDiv.classList.add('active');
-                const data = await fetchAtmosfearData(country, 2010);
+                
+                // Use a default year (2020) for profile loading
+                const data = await fetchAtmosfearData(country, 2020);
                 setProfileLoading(false);
                 resultDiv.innerHTML = buildProfileHTML(data);
             } catch (err) {
                 setProfileLoading(false);
-                resultDiv.innerHTML = `<div style="text-align:center; padding:2rem; color:#ef4444;"><i class=\"fas fa-exclamation-triangle\" style=\"font-size:2rem; margin-bottom:1rem;\"></i><h4>Error Loading Data</h4><p>${'${err.message || "Failed to fetch data from the server"}'}</p></div>`;
+                resultDiv.innerHTML = `
+                    <div style="text-align:center; padding:2rem; color:#ef4444;">
+                        <i class="fas fa-exclamation-triangle" style="font-size:2rem; margin-bottom:1rem;"></i>
+                        <h4>Error Loading Data</h4>
+                        <p>${err.message || "Failed to fetch data from the server"}</p>
+                    </div>
+                `;
             }
         }
 
-        async function runPredictor(country, year){
+        async function runPredictor(country, year) {
             const resultDiv = document.getElementById('resultContentPred');
             const placeholder = document.getElementById('placeholderPred');
-            const loading = document.getElementById('loadingMessagePred');
-            if (!country || !year) { alert('Please select both country and year.'); return; }
+            
+            if (!country || !year) {
+                alert('Please select both country and year.');
+                return;
+            }
+            
             try {
                 placeholder.style.display = 'none';
-                loading.style.display = 'block';
+                setPredictorLoading(true);
                 resultDiv.innerHTML = '';
                 resultDiv.classList.add('active');
+                
                 const data = await fetchAtmosfearData(country, year);
-                loading.style.display = 'none';
+                setPredictorLoading(false);
                 resultDiv.innerHTML = buildPredictorHTML(data, Number(year));
             } catch (err) {
-                loading.style.display = 'none';
-                resultDiv.innerHTML = `<div style=\"text-align:center; padding:2rem; color:#ef4444;\"><i class=\"fas fa-exclamation-triangle\" style=\"font-size:2rem; margin-bottom:1rem;\"></i><h4>Error Loading Data</h4><p>${'${err.message || "Failed to fetch data from the server"}'}</p></div>`;
+                setPredictorLoading(false);
+                resultDiv.innerHTML = `
+                    <div style="text-align:center; padding:2rem; color:#ef4444;">
+                        <i class="fas fa-exclamation-triangle" style="font-size:2rem; margin-bottom:1rem;"></i>
+                        <h4>Error Loading Data</h4>
+                        <p>${err.message || "Failed to fetch data from the server"}</p>
+                    </div>
+                `;
             }
         }
 
-        document.addEventListener('DOMContentLoaded', function(){
+        document.addEventListener('DOMContentLoaded', function() {
             populateCountries('global-country');
             populateYears('global-year');
-            const countrySel = document.getElementById('global-country');
-            const yearSel = document.getElementById('global-year');
-            countrySel.addEventListener('change', async function(){
-                const c = this.value.trim();
-                await loadCountryProfile(c);
-                if (yearSel.value) runPredictor(c, yearSel.value.trim());
+            
+            const countrySelect = document.getElementById('global-country');
+            const yearSelect = document.getElementById('global-year');
+            
+            countrySelect.addEventListener('change', async function() {
+                const country = this.value.trim();
+                if (country) {
+                    await loadCountryProfile(country);
+                    // If year is also selected, update predictor too
+                    const year = yearSelect.value.trim();
+                    if (year) {
+                        runPredictor(country, year);
+                    }
+                }
             });
-            yearSel.addEventListener('change', function(){
-                const c = countrySel.value.trim();
-                const y = this.value.trim();
-                if (c && y) runPredictor(c, y);
+            
+            yearSelect.addEventListener('change', function() {
+                const country = countrySelect.value.trim();
+                const year = this.value.trim();
+                if (country && year) {
+                    runPredictor(country, year);
+                }
             });
-            document.getElementById('predictBtnPred').addEventListener('click', function(){
-                const c = countrySel.value.trim();
-                const y = yearSel.value.trim();
-                runPredictor(c, y);
+            
+            document.getElementById('predictBtnPred').addEventListener('click', function() {
+                const country = countrySelect.value.trim();
+                const year = yearSelect.value.trim();
+                runPredictor(country, year);
             });
         });
     </script>
