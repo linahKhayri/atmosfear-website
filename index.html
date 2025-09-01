@@ -841,6 +841,11 @@
             color: #cbd5e1;
         }
 
+        .action-grid-wrapper {
+            overflow: hidden;
+            margin-bottom: 3rem;
+        }
+
         .action-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -1467,10 +1472,38 @@
             .pm25-grid,
             .tool-grid,
             .sources-grid,
-            .methods-grid,
-            .action-grid {
+            .methods-grid {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
+            }
+
+            /* Action Grid - Horizontal Scroll on Mobile */
+            .action-grid-wrapper {
+                overflow-x: auto;
+                overflow-y: hidden;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none; /* Firefox */
+                -ms-overflow-style: none; /* IE and Edge */
+                padding-bottom: 1rem;
+            }
+
+            .action-grid-wrapper::-webkit-scrollbar {
+                display: none; /* Chrome, Safari, Opera */
+            }
+
+            .action-grid {
+                display: flex;
+                gap: 1.5rem;
+                min-width: max-content;
+                padding: 0 1rem;
+            }
+
+            .action-card {
+                min-width: 280px;
+                max-width: 320px;
+                flex-shrink: 0;
+                padding: 2rem;
+                border-radius: 12px;
             }
 
             .pm25-content,
@@ -1581,19 +1614,21 @@
                 padding-top: 1.5rem;
             }
 
-            /* Action Cards */
+            /* Action Cards - Enhanced for horizontal scroll */
             .action-card {
-                padding: 1.5rem;
+                padding: 2rem;
                 border-radius: 12px;
+                background: rgba(255, 255, 255, 0.08);
+                backdrop-filter: blur(10px);
             }
 
             .action-card h3 {
-                font-size: 1.2rem;
-                margin-bottom: 1rem;
+                font-size: 1.3rem;
+                margin-bottom: 1.2rem;
             }
 
             .action-card p {
-                font-size: 0.95rem;
+                font-size: 1rem;
                 line-height: 1.6;
                 margin-bottom: 1rem;
             }
@@ -1731,8 +1766,7 @@
             .pm25-content,
             .methods-content,
             .tool-card,
-            .finding-card,
-            .action-card {
+            .finding-card {
                 padding: 1.2rem;
                 border-radius: 10px;
             }
@@ -1740,8 +1774,7 @@
             .pm25-content h3,
             .methods-content h3,
             .tool-card h3,
-            .finding-card h3,
-            .action-card h3 {
+            .finding-card h3 {
                 font-size: 1.1rem;
                 margin-bottom: 0.8rem;
             }
@@ -1749,7 +1782,24 @@
             .pm25-content p,
             .methods-content p,
             .tool-card p,
-            .finding-card p,
+            .finding-card p {
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+
+            /* Action Cards for small screens */
+            .action-card {
+                min-width: 260px;
+                max-width: 300px;
+                padding: 1.5rem;
+                border-radius: 10px;
+            }
+
+            .action-card h3 {
+                font-size: 1.1rem;
+                margin-bottom: 1rem;
+            }
+
             .action-card p {
                 font-size: 0.95rem;
                 line-height: 1.6;
@@ -2121,34 +2171,36 @@
                 Understanding the problem is just the first step. Here are concrete actions we can take to address air pollution and its health impacts.
             </p>
 
-            <div class="action-grid" style="grid-template-columns: repeat(3, 1fr);">
-                <div class="action-card fade-in interactive-element">
-                    <div class="action-icon">
-                        <i class="fas fa-leaf"></i>
-                    </div>
-                    <h3>Policy & Regulation</h3>
-                    <p>Advocate for stronger air quality standards based on <a href="https://www.who.int/news-room/fact-sheets/detail/ambient-(outdoor)-air-quality-and-health" target="_blank" style="color: #fbbf24; text-decoration: underline;">WHO guidelines</a>. Support policies that transition energy systems to cleaner sources.</p>
+            <div class="action-grid-wrapper">
+                <div class="action-grid" style="grid-template-columns: repeat(3, 1fr);">
+                    <div class="action-card fade-in interactive-element">
+                        <div class="action-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h3>Policy & Regulation</h3>
+                        <p>Advocate for stronger air quality standards based on <a href="https://www.who.int/news-room/fact-sheets/detail/ambient-(outdoor)-air-quality-and-health" target="_blank" style="color: #fbbf24; text-decoration: underline;">WHO guidelines</a>. Support policies that transition energy systems to cleaner sources.</p>
 
-                </div>
-
-                <div class="action-card fade-in interactive-element">
-                    <div class="action-icon">
-                        <i class="fas fa-heart"></i>
                     </div>
-                    <h3>Personal Protection</h3>
-                    <p>Check air quality regularly using reliable sources or local monitoring apps.</p>
-                    <p>Follow <a href="https://www.who.int/news-room/fact-sheets/detail/ambient-(outdoor)-air-quality-and-health" target="_blank" style="color: #fbbf24; text-decoration: underline;">WHO guidelines</a> which recommend PM₂.₅ levels not exceeding 5μg/m³ annually.</p>
-                    <p>Limit outdoor activities on high-pollution days. Use N95 masks and air purifiers in homes and workplaces.</p>
-                </div>
 
-                <div class="action-card fade-in interactive-element">
-                    <div class="action-icon">
-                        <i class="fas fa-chart-line"></i>
+                    <div class="action-card fade-in interactive-element">
+                        <div class="action-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Personal Protection</h3>
+                        <p>Check air quality regularly using reliable sources or local monitoring apps.</p>
+                        <p>Follow <a href="https://www.who.int/news-room/fact-sheets/detail/ambient-(outdoor)-air-quality-and-health" target="_blank" style="color: #fbbf24; text-decoration: underline;">WHO guidelines</a> which recommend PM₂.₅ levels not exceeding 5μg/m³ annually.</p>
+                        <p>Limit outdoor activities on high-pollution days. Use N95 masks and air purifiers in homes and workplaces.</p>
                     </div>
-                    <h3>Research & Data</h3>
-                    <p>Use our Country Profile Tool to explore air pollution data and health impacts specific to different regions.</p>
-                    <p>Share data-driven insights with local policymakers to advocate for evidence-based regulations.</p>
-                    <p>Support research into health impacts of air pollution.</p>
+
+                    <div class="action-card fade-in interactive-element">
+                        <div class="action-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Research & Data</h3>
+                        <p>Use our Country Profile Tool to explore air pollution data and health impacts specific to different regions.</p>
+                        <p>Share data-driven insights with local policymakers to advocate for evidence-based regulations.</p>
+                        <p>Support research into health impacts of air pollution.</p>
+                    </div>
                 </div>
             </div>
         </div>
